@@ -1,0 +1,52 @@
+{
+    "region": [
+        {
+            "nombre": "Santiago",
+            "codigo": "CL",
+            "lat_lon": {
+                "lat": "-33.4569397",
+                "lon": "-70.6482697"
+            }
+        },
+        {
+            "nombre": "Zurich",
+            "codigo": "CH",
+            "lat_lon": {
+                "lat": "47.3768866",
+                "lon": "8.541694"
+            }
+        },
+        {
+            "nombre": "Auckland",
+            "codigo": "NZ",
+            "lat_lon": {
+                "lat": "-36.8484597",
+                "lon": "174.7633315"
+            }
+        },
+        {
+            "nombre": "Sydney",
+            "codigo": "AU",
+            "lat_lon": {
+                "lat": "-33.8390007",
+                "lon": "151.2071991"
+            }
+        },
+        {
+            "nombre": "Londres",
+            "codigo": "UK",
+            "lat_lon": {
+                "lat": "51.5085297",
+                "lon": "-0.12574"
+            }
+        },
+        {
+            "nombre": "Georgia",
+            "codigo": "USA",
+            "lat_lon": {
+                "lat": "42.3154068",
+                "lon": "43.3568916"
+            }
+        }
+    ]
+}
