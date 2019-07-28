@@ -58,7 +58,7 @@
         /**
          * Socket.io
          */
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('http://ec2-54-91-99-208.compute-1.amazonaws.com:3000');
 
         socket.emit('emit');
         socket.on('evento', function(data){

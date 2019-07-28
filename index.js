@@ -50,9 +50,9 @@ io.on('connection', function (socket) {
       socket.emit('evento', res);
     });
   });
-  /*
+  
   setInterval( async function(){
     let resultado = await webhook.webhook();
     socket.emit('evento', resultado);
-  }, 100000000);*/
+  }, 10000);
 });
