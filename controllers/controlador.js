@@ -2,7 +2,7 @@ const redis = require('./../models/modelo');
 const request =  require('request');
 const moment = require('moment-timezone');
 
-var api_url = 'https://api.darksky.net/forecast/9c4e396581e70297dd83c2bc503bae36/';
+var api_url = 'https://api.darksky.net/forecast/81c9d16eed663e0885ed736184d827c9/';
 
 const tasa_fallo_random = () => {
     if(Math.random(0, 1) < 0.8){
@@ -11,16 +11,6 @@ const tasa_fallo_random = () => {
 }
   
 const get_hora_temperatura =  function(region) {
-    /*
-    try{
-        tasa_fallo_random();
-    }catch(e){
-        console.error('Ops! the request to forecast api was failed, retrying...');
-        timestamp = moment().unix();
-        redis.post_error(timestamp, {'error' : e.message });
-        return get_hora_temperatura(region);
-    }
-    */
     return new Promise(async function(resolve, reject){
         let datos = await redis.get_lat_lon(region);
         datos = JSON.parse(datos);

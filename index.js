@@ -50,10 +50,11 @@ io.on('connection', function (socket) {
       socket.emit('evento', res);
     });
   });
-  
+  /*
   setInterval( async function(){
     webhook.get_informacion_region().then(function(res){
       socket.emit('evento', res);
     });
   }, 10000);
+  */
 });

@@ -60,7 +60,12 @@
          */
         var socket = io.connect('http://ec2-54-91-99-208.compute-1.amazonaws.com:3000');
 
-        socket.emit('emit');
+        socket.emit('emit');// activacion inicial
+
+        setInterval(function(){
+          socket.emit('emit');
+        }, 15000);
+
         socket.on('evento', function(data){
           for(let i = 0; i < data.length; i++){
             document.getElementById("temp_" + data[i].codigo).innerHTML = data[i].temperatura;
@@ -68,6 +73,7 @@
           }
           document.getElementById("content-cargando").style.display = "none";
         });
+
       </script>
 </body>
 </html>
