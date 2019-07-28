@@ -30,7 +30,7 @@ for (let clave in regiones.region){
 
 // iniciamos la instancia de express
 server.listen(PORT, function () {
-  console.log('Servidor express: puerto ' + PORT);
+  console.log('Servidor express en el puerto ' + PORT);
 });
 
 app.get('/', function (req, res) {
