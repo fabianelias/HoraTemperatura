@@ -52,7 +52,8 @@ io.on('connection', function (socket) {
   });
   
   setInterval( async function(){
-    let resultado = await webhook.webhook();
-    socket.emit('evento', resultado);
+    webhook.get_informacion_region().then(function(res){
+      socket.emit('evento', res);
+    });
   }, 10000);
 });
