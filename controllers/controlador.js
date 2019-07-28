@@ -1,37 +1,46 @@
 const redis = require('./../models/modelo');
-const request = require('request');
+const request =  require('request');
+const moment = require('moment-timezone');
 
-var api_url = 'https://api.darksky.net/forecast/883d52603767cd031f94617c065f584c/';
+var api_url = 'https://api.darksky.net/forecast/9c4e396581e70297dd83c2bc503bae36/';
 
-exports.get_hora_temperatura = async function(region) {
-    /**
-     * buscamos la data de la region
-     */
-    try {
-        let datos = await redis.get_lat_lon('Santiago');
-        datos = JSON.parse(datos);
-        let endpoint = api_url + datos.lat + ',' + datos.lon;
-        request(endpoint, function (error, response, body) {
-
-            /*if (Math.rand(0, 1) < 0.1) {
-                throw new Error('How unfortunate! The API Request Failed');
-            }*/
-
-            //console.log('error:', error); // Print the error if one occurred
-            //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            //console.log('body:', body); // Print the HTML for the Google homepage.
-
-            body = JSON.parse(body);
-            // funcion (°F − 32) × 5/9 = °C
-            let celsius = (parseFloat(body.currently.temperature) - parseInt(32)) * 5/9;
-            let respuesta = {
-                "hora": body.currently.time,
-                "temperatura": celsius
-            };
-            console.log(respuesta);
-        });
-
-    } catch(err) {
-        console.error(err);
+const tasa_fallo_random = () => {
+    if(Math.random(0, 1) < 0.8){
+        throw new Error('How unfortunate! The API Request Failed') 
     }
+}
+  
+const get_hora_temperatura =  function(region) {
+    /*
+    try{
+        tasa_fallo_random();
+    }catch(e){
+        console.error('Ops! the request to forecast api was failed, retrying...');
+        timestamp = moment().unix();
+        redis.post_error(timestamp, {'error' : e.message });
+        return get_hora_temperatura(region);
+    }
+    */
+    return new Promise(async function(resolve, reject){
+        let datos = await redis.get_lat_lon(region);
+        datos = JSON.parse(datos);
+        let endpoint = api_url + datos.lat + ',' + datos.lon + '?units=si';
+        request(endpoint, function (error, response, body) {
+            if(error){
+                reject(error);
+            }
+            body = JSON.parse(body);
+            let temp = '/ '+ Math.round(body.currently.temperature) + 'º';
+            let hora = moment.tz(body.hourly.data.time, body.timezone).format('ha');
+
+            let respuesta = {
+                "hora": hora,
+                "temperatura": temp,
+                "codigo": datos.codigo,
+            };
+            resolve(respuesta);
+        });  
+    });
 };
+
+module.exports = {get_hora_temperatura};

@@ -10,7 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "moment-timezone": "^0.5.26",
     "redis": "^2.8.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "retry-request": "^4.1.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   }
 }

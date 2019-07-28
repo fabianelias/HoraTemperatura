@@ -17,9 +17,9 @@ client.on('error', function (err) {
 exports.post_lat_lon = function (region, coors) {
     client.hset('Regiones', region, JSON.stringify(coors),  function(err, reply) {
         if(err) {
-        console.error(err);
+            return false;
         } else {
-        console.log(reply);
+            return true
         }
     });
 };
@@ -43,3 +43,12 @@ exports.get_lat_lon = function (region) {
 /**
  * Registramos los errores de los request
  */
+exports.post_error = function (timestamp, error) {
+    client.hset('Api.errors', timestamp, JSON.stringify(error),  function(err, reply) {
+        if(err) {
+            return false;
+        } else {
+            return true
+        }
+    });
+};

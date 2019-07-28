@@ -9,11 +9,65 @@
 </head>
 <body>
     <main role="main" class="flex-shrink-0">
-        <div class="container">
-          <h1 class="mt-5 lp_hglt_cls_sticky_footer">Sticky footer</h1>
-          <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
-          <p>Use <a href="/docs/4.3/examples/sticky-footer-navbar/">the sticky footer with a fixed navbar</a> if need be, too.</p>
+        <div class="container text-center">
+          <h1 class="mt-5 lp_hglt_cls_sticky_footer text-center">Hora y temperatura RL</h1>
+          <p class="lead text-center">Hora y temperatura en tiempo real de diferentes regiones.</p>
+          <small>Código fuente en <a href="https://github.com/fabianelias/HoraTemperatura">Github</a>.</small>
+          <div class="col-md-12 text-center" id="content-cargando">
+            <br>
+            <h1><small>Cargando..</small></h1>
+          </div>
+          <div class="row" id="content-horas">
+            <div class="col-md-12 text-center">
+              <br>
+              <h1><span id="hora_CL"></span><small id="temp_CL">/ 0º</small></h1>
+              Santiago, CL
+              <hr>
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-2">
+              <h4><span id="hora_CH"></span><small id="temp_CH">/ 0º</small></h4>
+              Zurich, CH
+            </div>
+            <div class="col-md-2">
+                <h4><span id="hora_NZ"></span><small id="temp_NZ">/ 0º</small></h4>
+                Auckland, NZ
+            </div>
+            <div class="col-md-2">
+                <h4><span id="hora_AU"></span><small id="temp_AU">/ 0º</small></h4>
+                Sydney, AU
+            </div>
+            <div class="col-md-2">
+                <h4><span id="hora_UK"></span><small id="temp_UK">/ 0º</small></h4>
+                Londres, UK
+              </div>
+            <div class="col-md-2">
+                <h4><span id="hora_USA"></span><small id="temp_USA">/ 0º</small></h4>
+                Georgia, USA
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+          </div>
         </div>
       </main>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script type="text/javascript">
+        /**
+         * Socket.io
+         */
+        var socket = io.connect('http://localhost:3000');
+
+        socket.emit('emit');
+        socket.on('evento', function(data){
+          for(let i = 0; i < data.length; i++){
+            document.getElementById("temp_" + data[i].codigo).innerHTML = data[i].temperatura;
+            document.getElementById("hora_" + data[i].codigo).innerHTML = data[i].hora;
+          }
+          document.getElementById("content-cargando").style.display = "none";
+        });
+      </script>
 </body>
 </html>
