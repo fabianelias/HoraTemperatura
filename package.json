@@ -12,7 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "moment-timezone": "^0.5.26",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "request": "^2.88.0",
     "retry-request": "^4.1.1",
     "socket.io": "^2.2.0",
